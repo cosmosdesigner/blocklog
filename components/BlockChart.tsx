@@ -10,7 +10,11 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Block } from "../types";
-import { calculateDuration } from "../lib/utils";
+import {
+  calculateDuration,
+  formatDuration,
+  convertTotalHoursToDuration,
+} from "../lib/utils";
 
 interface BlockChartProps {
   blocks: Block[];
@@ -46,7 +50,7 @@ export const BlockChart: React.FC<BlockChartProps> = ({ blocks }) => {
 
         return {
           name: monthName,
-          duration: Math.round(monthlyTotals[key]),
+          duration: monthlyTotals[key],
         };
       });
   }, [blocks]);
@@ -58,6 +62,15 @@ export const BlockChart: React.FC<BlockChartProps> = ({ blocks }) => {
       </div>
     );
   }
+
+  const tooltipFormatter = (value: number, name: string) => {
+    if (typeof value !== "number" || value < 0) {
+      return ["0s", name];
+    }
+    const durationParts = convertTotalHoursToDuration(value);
+    const formattedDuration = formatDuration(durationParts);
+    return [formattedDuration, name];
+  };
 
   return (
     <div style={{ width: "100%", height: 300 }}>
@@ -81,13 +94,10 @@ export const BlockChart: React.FC<BlockChartProps> = ({ blocks }) => {
               color: "#f1f5f9", // slate-100
             }}
             cursor={{ fill: "#334155" }}
+            formatter={tooltipFormatter}
           />
           <Legend wrapperStyle={{ color: "#f1f5f9" }} />
-          <Bar
-            dataKey="duration"
-            fill="#0ea5e9"
-            name="Total Duration (hours)"
-          />
+          <Bar dataKey="duration" fill="#0ea5e9" name="Total Duration" />
         </BarChart>
       </ResponsiveContainer>
     </div>
