@@ -1,0 +1,5 @@
+{
+  "name": "Blocklog - Productivity Tracker",
+  "description": "A web application to track, visualize, and manage personal or team blockers. Log events that hinder progress, monitor their duration, and analyze patterns over time to improve productivity.",
+  "requestFramePermissions": []
+}

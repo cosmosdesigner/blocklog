@@ -1,2 +1,14 @@
-# blocklog
-O Blocklog é uma aplicação para profissionais de IT registarem os seus bloqueios no trabalho. Inicia e termina bloqueios com um clique, com registo automático das datas. Útil para retros, relatórios e melhoria de processos. Simples, útil e 100% controlado pelo backend.
+# Run and deploy your AI Studio app
+
+This contains everything you need to run your app locally.
+
+## Run Locally
+
+**Prerequisites:**  Node.js
+
+
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
