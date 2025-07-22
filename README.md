@@ -99,13 +99,42 @@ The project is organized into a modular structure with a clear separation of con
     └── utils.ts         # Helper functions for date/time calculation, formatting, and validation.
 ```
 
-### Component Breakdown:
+---
 
-- **`App.tsx`**: The top-level component that manages the global state (blocks, modals) and orchestrates the different parts of the application.
-- **`Dashboard.tsx`**: Renders the statistics cards and handles the logic for switching between the `BlockChart` and `YearView`. Also contains the data import/export functionality.
-- **`BlockList.tsx` / `BlockCard.tsx`**: Manages the display of individual block entries, including the live-updating timer.
-- **`BlockChart.tsx`**: Visualizes aggregated block durations per month using a bar chart.
-- **`YearView.tsx`**: Renders the full-year calendar heatmap.
-- **`Modal.tsx`**: A generic modal component used for logging/editing blocks and viewing details.
-- **`useLocalStorage.ts`**: A key hook that abstracts away the logic for reading from and writing to the browser's `localStorage`, making state persistence seamless.
-- **`utils.ts`**: A crucial file containing pure functions for all business logic, such as calculating durations, formatting dates, and validating imported data.
+## 🔮 Future Features & Roadmap
+
+Blocklog has a strong foundation, but there are many exciting possibilities for the future. Here are some of the features being considered:
+
+- **Blocker Categorization & Tagging:**
+
+  - Allow users to assign a **category** to each block (e.g., "Dependency," "Technical Debt," "Environment Issue," "Awaiting Review"). This would enable much deeper analysis.
+
+- **Advanced Analytics by Category:**
+
+  - A new dashboard view to **group total blocked time by category**. This would quickly reveal the most significant sources of friction (e.g., "We lost 40 hours to environment issues last month").
+
+- **AI-Powered Unblocker Assistant:**
+
+  - Integrate a large language model (LLM) like Gemini to provide proactive help. When a user logs a block, the AI could analyze the title and reason to:
+    - Suggest potential solutions or troubleshooting steps.
+    - Link to relevant internal documentation or public resources.
+    - Identify similar past blockers and their resolutions.
+
+- **Native Desktop Application:**
+
+  - Package the application using **Tauri** or **Electron** to create a native desktop experience for Windows, macOS, and Linux. This would offer better OS integration, offline reliability, and system tray functionality.
+
+- **Team Collaboration & Cloud Sync:**
+
+  - Move beyond `localStorage` to an optional cloud-based backend (like Firebase or Supabase) to enable:
+    - **Team-shared blocklogs:** Allow teams to see a unified view of all member blockers.
+    - **Cross-device sync:** Access your Blocklog from any device.
+
+- **Integrations with Developer Tools:**
+
+  - Connect Blocklog to popular platforms like **Jira, GitHub, or Slack**.
+  - For example, automatically log a blocker when a Jira ticket is moved to a "Blocked" column, or resolve it based on a GitHub commit message.
+
+- **Reporting & Goal Setting:**
+  - Generate exportable weekly or monthly PDF reports summarizing key metrics and trends.
+  - Allow users or teams to set goals for reducing total blocked time and track their progress.
