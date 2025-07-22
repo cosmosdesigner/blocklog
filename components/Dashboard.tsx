@@ -6,9 +6,13 @@ import { BlockChart } from "./BlockChart";
 
 interface DashboardProps {
   blocks: Block[];
+  onViewBlockDetails: (block: Block | null) => void;
 }
 
-export const Dashboard: React.FC<DashboardProps> = ({ blocks }) => {
+export const Dashboard: React.FC<DashboardProps> = ({
+  blocks,
+  onViewBlockDetails,
+}) => {
   const stats = useMemo(() => {
     const totalBlocks = blocks.length;
     const ongoingBlocks = blocks.filter(
@@ -19,19 +23,34 @@ export const Dashboard: React.FC<DashboardProps> = ({ blocks }) => {
       return acc + calculateDuration(block.startDate, block.endDate).totalHours;
     }, 0);
 
-    const longestBlock = blocks.reduce((max, block) => {
-      const duration = calculateDuration(
-        block.startDate,
-        block.endDate
-      ).totalHours;
-      return duration > max ? duration : max;
-    }, 0);
+    const longestBlockObject =
+      blocks.length > 0
+        ? blocks.reduce((maxBlock, currentBlock) => {
+            const maxDuration = calculateDuration(
+              maxBlock.startDate,
+              maxBlock.endDate
+            ).totalHours;
+            const currentDuration = calculateDuration(
+              currentBlock.startDate,
+              currentBlock.endDate
+            ).totalHours;
+            return currentDuration > maxDuration ? currentBlock : maxBlock;
+          }, blocks[0])
+        : null;
+
+    const longestBlockDuration = longestBlockObject
+      ? calculateDuration(
+          longestBlockObject.startDate,
+          longestBlockObject.endDate
+        ).totalHours
+      : 0;
 
     return {
       totalBlocks,
       ongoingBlocks,
       totalBlockedHours: Math.round(totalBlockedHours),
-      longestBlock: Math.round(longestBlock),
+      longestBlock: Math.round(longestBlockDuration),
+      longestBlockObject,
     };
   }, [blocks]);
 
@@ -45,7 +64,15 @@ export const Dashboard: React.FC<DashboardProps> = ({ blocks }) => {
           title="Total Time Blocked"
           value={`${stats.totalBlockedHours}h`}
         />
-        <StatCard title="Longest Block" value={`${stats.longestBlock}h`} />
+        <StatCard
+          title="Longest Block"
+          value={`${stats.longestBlock}h`}
+          onClick={
+            stats.longestBlockObject
+              ? () => onViewBlockDetails(stats.longestBlockObject)
+              : undefined
+          }
+        />
       </div>
       <div className="bg-slate-800 p-4 sm:p-6 rounded-lg shadow-lg border border-slate-700">
         <h3 className="text-xl font-semibold text-white mb-4">
