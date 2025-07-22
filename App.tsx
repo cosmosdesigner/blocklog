@@ -20,6 +20,7 @@ const App: React.FC = () => {
     viewingBlock,
     editingBlock,
     handleCloseModal,
+    setBlocks,
   } = useBlocks();
 
   return (
@@ -29,6 +30,7 @@ const App: React.FC = () => {
         <Dashboard
           blocks={blocks}
           onViewBlockDetails={handleViewBlockDetails}
+          onImport={setBlocks}
         />
         <BlockList
           blocks={blocks}

@@ -1,3 +1,5 @@
+import { Block, BlockStatus } from "@/types";
+
 export const calculateDuration = (
   startDateStr: string,
   endDateStr?: string
@@ -121,4 +123,22 @@ export const getDaysInRange = (startDate: Date, endDate: Date): Date[] => {
     currentDate.setDate(currentDate.getDate() + 1);
   }
   return dates;
+};
+
+export const isValidBlockArray = (data: any): data is Block[] => {
+  if (!Array.isArray(data)) {
+    return false;
+  }
+  return data.every(
+    (item) =>
+      typeof item === "object" &&
+      item !== null &&
+      typeof item.id === "string" &&
+      typeof item.title === "string" &&
+      typeof item.reason === "string" &&
+      typeof item.startDate === "string" &&
+      (typeof item.endDate === "undefined" ||
+        typeof item.endDate === "string") &&
+      Object.values(BlockStatus).includes(item.status as BlockStatus)
+  );
 };

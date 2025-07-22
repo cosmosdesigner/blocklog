@@ -76,6 +76,7 @@ export default function useBlocks() {
     isModalOpen,
     viewingBlock,
     editingBlock,
+    setBlocks,
     handleOpenModal,
     handleCloseModal,
     handleSaveBlock,
