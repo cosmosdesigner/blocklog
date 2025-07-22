@@ -1,6 +1,10 @@
 import React, { useMemo, useState } from "react";
 import { Block, BlockStatus } from "../types";
-import { calculateDuration } from "../lib/utils";
+import {
+  calculateDuration,
+  formatDuration,
+  convertTotalHoursToDuration,
+} from "../lib/utils";
 import { StatCard } from "./StatCard";
 import { BlockChart } from "./BlockChart";
 import { Button } from "./Button";
@@ -27,6 +31,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
       return acc + calculateDuration(block.startDate, block.endDate).totalHours;
     }, 0);
 
+    const totalDurationParts = convertTotalHoursToDuration(totalBlockedHours);
+    const formattedTotalDuration = formatDuration(totalDurationParts);
+
     const longestBlockObject =
       blocks.length > 0
         ? blocks.reduce((maxBlock, currentBlock) => {
@@ -42,18 +49,22 @@ export const Dashboard: React.FC<DashboardProps> = ({
           }, blocks[0])
         : null;
 
-    const longestBlockDuration = longestBlockObject
+    const longestBlockDurationHours = longestBlockObject
       ? calculateDuration(
           longestBlockObject.startDate,
           longestBlockObject.endDate
         ).totalHours
       : 0;
+    const longestBlockParts = convertTotalHoursToDuration(
+      longestBlockDurationHours
+    );
+    const formattedLongestBlock = formatDuration(longestBlockParts);
 
     return {
       totalBlocks,
       ongoingBlocks,
-      totalBlockedHours: Math.round(totalBlockedHours),
-      longestBlock: Math.round(longestBlockDuration),
+      totalBlockedDuration: formattedTotalDuration,
+      longestBlock: formattedLongestBlock,
       longestBlockObject,
     };
   }, [blocks]);
@@ -66,11 +77,11 @@ export const Dashboard: React.FC<DashboardProps> = ({
         <StatCard title="Ongoing Blocks" value={stats.ongoingBlocks} />
         <StatCard
           title="Total Time Blocked"
-          value={`${stats.totalBlockedHours}h`}
+          value={stats.totalBlockedDuration}
         />
         <StatCard
           title="Longest Block"
-          value={`${stats.longestBlock}h`}
+          value={stats.longestBlock}
           onClick={
             stats.longestBlockObject
               ? () => onViewBlockDetails(stats.longestBlockObject)
