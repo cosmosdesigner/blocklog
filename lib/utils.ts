@@ -97,3 +97,28 @@ export const convertTotalHoursToDuration = (totalHours: number) => {
 
   return { days, hours, minutes, seconds };
 };
+
+export const getDaysInRange = (startDate: Date, endDate: Date): Date[] => {
+  const dates: Date[] = [];
+  // Ensure we are working with dates only, no time part
+  let currentDate = new Date(
+    startDate.getFullYear(),
+    startDate.getMonth(),
+    startDate.getDate()
+  );
+  const lastDate = new Date(
+    endDate.getFullYear(),
+    endDate.getMonth(),
+    endDate.getDate()
+  );
+
+  if (currentDate > lastDate) {
+    return [];
+  }
+
+  while (currentDate <= lastDate) {
+    dates.push(new Date(currentDate));
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+  return dates;
+};

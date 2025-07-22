@@ -1,8 +1,10 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Block, BlockStatus } from "../types";
 import { calculateDuration } from "../lib/utils";
 import { StatCard } from "./StatCard";
 import { BlockChart } from "./BlockChart";
+import { Button } from "./Button";
+import { YearView } from "./YearView";
 
 interface DashboardProps {
   blocks: Block[];
@@ -13,6 +15,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
   blocks,
   onViewBlockDetails,
 }) => {
+  const [viewMode, setViewMode] = useState<"chart" | "year">("chart");
+
   const stats = useMemo(() => {
     const totalBlocks = blocks.length;
     const ongoingBlocks = blocks.filter(
@@ -75,10 +79,28 @@ export const Dashboard: React.FC<DashboardProps> = ({
         />
       </div>
       <div className="bg-slate-800 p-4 sm:p-6 rounded-lg shadow-lg border border-slate-700">
-        <h3 className="text-xl font-semibold text-white mb-4">
-          Total Blocked Hours per Month
-        </h3>
-        <BlockChart blocks={blocks} />
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-semibold text-white">
+            {viewMode === "chart"
+              ? "Total Blocked Hours per Month"
+              : "Yearly Block Overview"}
+          </h3>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() =>
+              setViewMode((prev) => (prev === "chart" ? "year" : "chart"))
+            }
+          >
+            {viewMode === "chart" ? "View Year View" : "View Chart View"}
+          </Button>
+        </div>
+
+        {viewMode === "chart" ? (
+          <BlockChart blocks={blocks} />
+        ) : (
+          <YearView blocks={blocks} />
+        )}
       </div>
     </section>
   );
