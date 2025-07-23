@@ -103,8 +103,6 @@ The project is organized into a modular structure with a clear separation of con
 
 ## 🔮 Future Features & Roadmap
 
-Blocklog has a strong foundation, but there are many exciting possibilities for the future. Here are some of the features being considered:
-
 - **Tagging, Categorization & Filtering:**
   - Implement a **tag system** to allow users to categorize blockers during creation (e.g., "Dependency," "Technical Debt," "Awaiting Review").
   - Introduce advanced **filtering by tags** in the history view, making it easy to sort and find specific types of blockers.
