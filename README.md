@@ -136,5 +136,5 @@ Blocklog has a strong foundation, but there are many exciting possibilities for 
   - For example, automatically log a blocker when a Jira ticket is moved to a "Blocked" column, or resolve it based on a GitHub commit message.
 
 - **Reporting & Goal Setting:**
-  - Generate exportable weekly or monthly PDF reports summarizing key metrics and trends.
+  - Generate exportable weekly or monthly Excel and/or PDF reports summarizing key metrics and trends.
   - Allow users or teams to set goals for reducing total blocked time and track their progress.
