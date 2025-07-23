@@ -1,4 +1,4 @@
-import { Block, BlockStatus } from "@/types";
+import { Block } from "@/types";
 import { useCallback, useState } from "react";
 import { useLocalStorage } from "./useLocalStorage";
 
@@ -19,7 +19,7 @@ export default function useBlocks() {
   }, []);
 
   const handleSaveBlock = useCallback(
-    (blockData: Omit<Block, "id" | "status">) => {
+    (blockData: Omit<Block, "id" | "resolved">) => {
       if (editingBlock) {
         setBlocks((prev) =>
           prev.map((b) =>
@@ -30,7 +30,7 @@ export default function useBlocks() {
         const newBlock: Block = {
           id: Date.now().toString(),
           ...blockData,
-          status: BlockStatus.ONGOING,
+          resolved: '',
         };
         setBlocks((prev) => [newBlock, ...prev]);
       }
@@ -46,7 +46,7 @@ export default function useBlocks() {
           b.id === id
             ? {
                 ...b,
-                status: BlockStatus.RESOLVED,
+                resolved: new Date().toISOString(),
                 endDate: new Date().toISOString(),
               }
             : b
@@ -62,6 +62,11 @@ export default function useBlocks() {
     },
     [setBlocks]
   );
+
+  const handleEditBlock = useCallback((block: Block) => {
+    setEditingBlock(block);
+    setIsModalOpen(true);
+  }, []);
 
   const handleViewBlockDetails = useCallback((block: Block | null) => {
     setViewingBlock(block);
@@ -84,5 +89,6 @@ export default function useBlocks() {
     handleDeleteBlock,
     handleViewBlockDetails,
     handleCloseDetailsModal,
+    handleEditBlock
   };
 }

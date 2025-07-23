@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Block, BlockStatus } from "../types";
+import { Block } from "../types";
 import { calculateDuration, formatDuration, formatDate } from "../lib/utils";
 import { Button } from "./Button";
 
@@ -13,20 +13,20 @@ export const BlockDetails: React.FC<BlockDetailsProps> = ({
   onClose,
 }) => {
   const [duration, setDuration] = useState(
-    calculateDuration(block.startDate, block.endDate)
+    calculateDuration(block.created, block.resolved)
   );
 
   useEffect(() => {
-    if (block.status === BlockStatus.ONGOING) {
+    if (!block.resolved) {
       const timer = setInterval(() => {
-        setDuration(calculateDuration(block.startDate));
+        setDuration(calculateDuration(block.created));
       }, 1000);
       return () => clearInterval(timer);
     }
-  }, [block.status, block.startDate]);
+  }, [block.resolved, block.created]);
 
   const statusColor =
-    block.status === BlockStatus.RESOLVED
+    block.resolved
       ? "bg-emerald-500/20 text-emerald-400"
       : "bg-amber-500/20 text-amber-400";
 
@@ -38,14 +38,14 @@ export const BlockDetails: React.FC<BlockDetailsProps> = ({
         <span
           className={`px-3 py-1 text-sm font-semibold rounded-full ${statusColor}`}
         >
-          {block.status}
+          {block.resolved}
         </span>
       </div>
 
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-slate-300 mb-2">Reason</h3>
         <p className="bg-slate-700/50 p-3 rounded-md text-slate-300">
-          {block.reason}
+          {block.problem}
         </p>
       </div>
 
@@ -56,11 +56,11 @@ export const BlockDetails: React.FC<BlockDetailsProps> = ({
 
       <div className="text-sm text-slate-400 space-y-1">
         <p>
-          <strong>Started:</strong> {formatDate(block.startDate)}
+          <strong>Started:</strong> {formatDate(block.created)}
         </p>
-        {block.endDate && (
+        {block.resolved && (
           <p>
-            <strong>Resolved:</strong> {formatDate(block.endDate)}
+            <strong>Resolved:</strong> {formatDate(block.resolved)}
           </p>
         )}
       </div>

@@ -1,9 +1,10 @@
-import { Block, BlockStatus } from "@/types";
+import { Block } from "@/types";
 
 export const calculateDuration = (
   startDateStr: string,
   endDateStr?: string
 ) => {
+  debugger;
   const start = new Date(startDateStr);
   const end = endDateStr ? new Date(endDateStr) : new Date();
   let diff = end.getTime() - start.getTime();
@@ -125,7 +126,7 @@ export const getDaysInRange = (startDate: Date, endDate: Date): Date[] => {
   return dates;
 };
 
-export const isValidBlockArray = (data: any): data is Block[] => {
+export const isValidBlockArray = (data: Block[]): data is Block[] => {
   if (!Array.isArray(data)) {
     return false;
   }
@@ -135,10 +136,9 @@ export const isValidBlockArray = (data: any): data is Block[] => {
       item !== null &&
       typeof item.id === "string" &&
       typeof item.title === "string" &&
-      typeof item.reason === "string" &&
-      typeof item.startDate === "string" &&
-      (typeof item.endDate === "undefined" ||
-        typeof item.endDate === "string") &&
-      Object.values(BlockStatus).includes(item.status as BlockStatus)
+      typeof item.problem === "string" &&
+      typeof item.created === "string" &&
+      (typeof item.resolved === "undefined" ||
+        typeof item.resolved === "string")
   );
 };

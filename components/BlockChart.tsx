@@ -25,14 +25,14 @@ export const BlockChart: React.FC<BlockChartProps> = ({ blocks }) => {
     const monthlyTotals: { [key: string]: number } = {}; // Key format: "YYYY-MM"
 
     blocks.forEach((block) => {
-      const startDate = new Date(block.startDate);
+      const startDate = new Date(block.created);
       const year = startDate.getFullYear();
       const month = startDate.getMonth(); // 0-indexed (0 for Jan)
       const key = `${year}-${String(month).padStart(2, "0")}`;
 
       const duration = calculateDuration(
-        block.startDate,
-        block.endDate
+        block.created,
+        block.resolved
       ).totalHours;
 
       monthlyTotals[key] = (monthlyTotals[key] || 0) + duration;

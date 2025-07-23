@@ -21,6 +21,7 @@ const App: React.FC = () => {
     editingBlock,
     handleCloseModal,
     setBlocks,
+    handleEditBlock
   } = useBlocks();
 
   return (
@@ -36,6 +37,7 @@ const App: React.FC = () => {
           blocks={blocks}
           onResolve={handleResolveBlock}
           onDelete={handleDeleteBlock}
+           onEdit={handleEditBlock}
         />
       </main>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>

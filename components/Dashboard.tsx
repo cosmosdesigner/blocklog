@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useRef } from "react";
-import { Block, BlockStatus } from "../types";
+import { Block } from "../types";
 import {
   calculateDuration,
   formatDuration,
@@ -27,12 +27,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
   const stats = useMemo(() => {
     const totalBlocks = blocks.length;
-    const ongoingBlocks = blocks.filter(
-      (b) => b.status === BlockStatus.ONGOING
-    ).length;
+   const ongoingBlocks = blocks.filter(b => !b.resolved).length;
 
-    const totalBlockedHours = blocks.reduce((acc, block) => {
-      return acc + calculateDuration(block.startDate, block.endDate).totalHours;
+   const totalBlockedHours = blocks.reduce((acc, block) => {
+      return acc + calculateDuration(block.created, block.resolved).totalHours;
     }, 0);
 
     const totalDurationParts = convertTotalHoursToDuration(totalBlockedHours);
@@ -42,12 +40,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
       blocks.length > 0
         ? blocks.reduce((maxBlock, currentBlock) => {
             const maxDuration = calculateDuration(
-              maxBlock.startDate,
-              maxBlock.endDate
+              maxBlock.created,
+              maxBlock.resolved
             ).totalHours;
             const currentDuration = calculateDuration(
-              currentBlock.startDate,
-              currentBlock.endDate
+              currentBlock.created,
+              currentBlock.resolved
             ).totalHours;
             return currentDuration > maxDuration ? currentBlock : maxBlock;
           }, blocks[0])
@@ -55,8 +53,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
     const longestBlockDurationHours = longestBlockObject
       ? calculateDuration(
-          longestBlockObject.startDate,
-          longestBlockObject.endDate
+          longestBlockObject.created,
+          longestBlockObject.resolved
         ).totalHours
       : 0;
     const longestBlockParts = convertTotalHoursToDuration(
