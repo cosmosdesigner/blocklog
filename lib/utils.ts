@@ -4,7 +4,6 @@ export const calculateDuration = (
   startDateStr: string,
   endDateStr?: string
 ) => {
-  debugger;
   const start = new Date(startDateStr);
   const end = endDateStr ? new Date(endDateStr) : new Date();
   let diff = end.getTime() - start.getTime();
