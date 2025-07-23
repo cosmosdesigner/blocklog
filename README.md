@@ -105,33 +105,26 @@ The project is organized into a modular structure with a clear separation of con
 
 Blocklog has a strong foundation, but there are many exciting possibilities for the future. Here are some of the features being considered:
 
-- **Blocker Categorization & Tagging:**
-
-  - Allow users to assign a **category** to each block (e.g., "Dependency," "Technical Debt," "Environment Issue," "Awaiting Review"). This would enable much deeper analysis.
-
-- **Advanced Analytics by Category:**
-
-  - A new dashboard view to **group total blocked time by category**. This would quickly reveal the most significant sources of friction (e.g., "We lost 40 hours to environment issues last month").
+- **Tagging, Categorization & Filtering:**
+  - Implement a **tag system** to allow users to categorize blockers during creation (e.g., "Dependency," "Technical Debt," "Awaiting Review").
+  - Introduce advanced **filtering by tags** in the history view, making it easy to sort and find specific types of blockers.
+  - Create a new dashboard widget to analyze **total time blocked by category**, revealing the most significant sources of friction.
 
 - **AI-Powered Unblocker Assistant:**
-
   - Integrate a large language model (LLM) like Gemini to provide proactive help. When a user logs a block, the AI could analyze the title and reason to:
     - Suggest potential solutions or troubleshooting steps.
     - Link to relevant internal documentation or public resources.
     - Identify similar past blockers and their resolutions.
 
 - **Native Desktop Application:**
-
   - Package the application using **Tauri** or **Electron** to create a native desktop experience for Windows, macOS, and Linux. This would offer better OS integration, offline reliability, and system tray functionality.
 
 - **Team Collaboration & Cloud Sync:**
-
   - Move beyond `localStorage` to an optional cloud-based backend (like Firebase or Supabase) to enable:
     - **Team-shared blocklogs:** Allow teams to see a unified view of all member blockers.
     - **Cross-device sync:** Access your Blocklog from any device.
 
 - **Integrations with Developer Tools:**
-
   - Connect Blocklog to popular platforms like **Jira, GitHub, or Slack**.
   - For example, automatically log a blocker when a Jira ticket is moved to a "Blocked" column, or resolve it based on a GitHub commit message.
 
