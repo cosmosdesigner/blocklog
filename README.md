@@ -104,25 +104,30 @@ The project is organized into a modular structure with a clear separation of con
 ## 🔮 Future Features & Roadmap
 
 - **Tagging, Categorization & Filtering:**
-  - Implement a **tag system** to allow users to categorize blockers during creation (e.g., "Dependency," "Technical Debt," "Awaiting Review").
+
+  - ✅ Implement a **tag system** to allow users to categorize blockers during creation (e.g., "Dependency," "Technical Debt," "Awaiting Review").
   - Introduce advanced **filtering by tags** in the history view, making it easy to sort and find specific types of blockers.
   - Create a new dashboard widget to analyze **total time blocked by category**, revealing the most significant sources of friction.
 
 - **AI-Powered Unblocker Assistant:**
+
   - Integrate a large language model (LLM) like Gemini to provide proactive help. When a user logs a block, the AI could analyze the title and reason to:
     - Suggest potential solutions or troubleshooting steps.
     - Link to relevant internal documentation or public resources.
     - Identify similar past blockers and their resolutions.
 
 - **Native Desktop Application:**
+
   - Package the application using **Tauri** or **Electron** to create a native desktop experience for Windows, macOS, and Linux. This would offer better OS integration, offline reliability, and system tray functionality.
 
 - **Team Collaboration & Cloud Sync:**
+
   - Move beyond `localStorage` to an optional cloud-based backend (like Firebase or Supabase) to enable:
     - **Team-shared blocklogs:** Allow teams to see a unified view of all member blockers.
     - **Cross-device sync:** Access your Blocklog from any device.
 
 - **Integrations with Developer Tools:**
+
   - Connect Blocklog to popular platforms like **Jira, GitHub, or Slack**.
   - For example, automatically log a blocker when a Jira ticket is moved to a "Blocked" column, or resolve it based on a GitHub commit message.
 

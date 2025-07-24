@@ -8,5 +8,9 @@ export interface Block {
   created: string; // ISO date string
   createdBy: string;
   resolved: string; // ISO date string, or empty string if not resolved
+  tags: Tag[];
 }
-
+export interface Tag {
+  title: string;
+  color: string;
+}

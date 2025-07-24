@@ -25,10 +25,9 @@ export const BlockDetails: React.FC<BlockDetailsProps> = ({
     }
   }, [block.resolved, block.created]);
 
-  const statusColor =
-    block.resolved
-      ? "bg-emerald-500/20 text-emerald-400"
-      : "bg-amber-500/20 text-amber-400";
+  const statusColor = block.resolved
+    ? "bg-emerald-500/20 text-emerald-400"
+    : "bg-amber-500/20 text-amber-400";
 
   return (
     <div className="p-2 text-white">
@@ -38,7 +37,7 @@ export const BlockDetails: React.FC<BlockDetailsProps> = ({
         <span
           className={`px-3 py-1 text-sm font-semibold rounded-full ${statusColor}`}
         >
-          {block.resolved}
+          {block.resolved && "Resolved"}
         </span>
       </div>
 
