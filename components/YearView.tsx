@@ -22,8 +22,8 @@ export const YearView: React.FC<{ blocks: Block[] }> = ({ blocks }) => {
   const blocksByDay = useMemo(() => {
     const data = new Map<string, Block[]>();
     blocks.forEach((block) => {
-      const start = new Date(block.startDate);
-      const end = block.endDate ? new Date(block.endDate) : new Date();
+      const start = new Date(block.created);
+      const end = block.created ? new Date(block.resolved) : new Date();
       const range = getDaysInRange(start, end);
       range.forEach((day) => {
         const key = day.toISOString().split("T")[0]; // "YYYY-MM-DD"
@@ -42,9 +42,9 @@ export const YearView: React.FC<{ blocks: Block[] }> = ({ blocks }) => {
       years[new Date().getFullYear()] = true;
     } else {
       blocks.forEach((block) => {
-        years[new Date(block.startDate).getFullYear()] = true;
-        if (block.endDate) {
-          years[new Date(block.endDate).getFullYear()] = true;
+        years[new Date(block.created).getFullYear()] = true;
+        if (block.resolved) {
+          years[new Date(block.created).getFullYear()] = true;
         }
       });
     }
