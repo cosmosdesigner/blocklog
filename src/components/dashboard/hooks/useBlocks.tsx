@@ -1,6 +1,6 @@
 import { Block } from "@/types";
 import { useCallback, useState } from "react";
-import { useLocalStorage } from "./useLocalStorage";
+import { useLocalStorage } from "../../../hooks/useLocalStorage";
 
 export default function useBlocks() {
   const [blocks, setBlocks] = useLocalStorage<Block[]>("blocks", []);
@@ -30,7 +30,7 @@ export default function useBlocks() {
         const newBlock: Block = {
           id: Date.now().toString(),
           ...blockData,
-          resolved: '',
+          resolved: "",
         };
         setBlocks((prev) => [newBlock, ...prev]);
       }
@@ -89,6 +89,6 @@ export default function useBlocks() {
     handleDeleteBlock,
     handleViewBlockDetails,
     handleCloseDetailsModal,
-    handleEditBlock
+    handleEditBlock,
   };
 }

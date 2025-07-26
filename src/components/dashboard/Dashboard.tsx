@@ -1,15 +1,17 @@
 import React, { useMemo, useState, useRef } from "react";
-import { Block } from "../../types";
+
 import {
   calculateDuration,
   formatDuration,
   convertTotalHoursToDuration,
   isValidBlockArray,
-} from "../lib/utils";
-import { StatCard } from "./StatCard";
-import { BlockChart } from "./BlockChart";
-import { Button } from "./Button";
-import { YearView } from "./YearView";
+} from "../../lib/utils";
+
+import { Block } from "@/types";
+import { StatCard } from "./components/StatCard";
+import { BlockChart } from "./components/BlockChart";
+import { Button } from "../Button";
+import { YearView } from "../yearView/YearView";
 
 interface DashboardProps {
   blocks: Block[];

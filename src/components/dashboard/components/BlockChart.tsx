@@ -9,12 +9,13 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { Block } from "../../types";
+
+import { Block } from "@/types";
 import {
   calculateDuration,
-  formatDuration,
   convertTotalHoursToDuration,
-} from "../lib/utils";
+  formatDuration,
+} from "@/src/lib/utils";
 
 interface BlockChartProps {
   blocks: Block[];
