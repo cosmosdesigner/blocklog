@@ -106,7 +106,7 @@ The project is organized into a modular structure with a clear separation of con
 - **Tagging, Categorization & Filtering:**
 
   - ✅ Implement a **tag system** to allow users to categorize blockers during creation (e.g., "Dependency," "Technical Debt," "Awaiting Review").
-  - Introduce advanced **filtering by tags** in the history view, making it easy to sort and find specific types of blockers.
+  - ✅ Introduce advanced **filtering by tags** in the history view, making it easy to sort and find specific types of blockers.
   - Create a new dashboard widget to analyze **total time blocked by category**, revealing the most significant sources of friction.
 
 - **AI-Powered Unblocker Assistant:**
