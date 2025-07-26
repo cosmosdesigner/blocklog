@@ -23,7 +23,6 @@ export const BlockForm: React.FC<BlockFormProps> = ({
   const [action, setAction] = useState("");
   const [communicationChannel, setCommunicationChannel] = useState("");
   const [createdBy, setCreatedBy] = useState("");
-  // const [tags, setTags] = useState<Tag[]>([]);
   const [tags, setTags] = useLocalStorage<Tag[]>("tags", []);
   useEffect(() => {
     if (existingBlock) {
@@ -33,6 +32,7 @@ export const BlockForm: React.FC<BlockFormProps> = ({
       setAction(existingBlock.action || "");
       setCommunicationChannel(existingBlock.communicationChannel || "");
       setCreatedBy(existingBlock.createdBy || "");
+      setTags(tags);
     } else {
       setTitle("");
       setEnvironment("");
@@ -40,6 +40,7 @@ export const BlockForm: React.FC<BlockFormProps> = ({
       setAction("");
       setCommunicationChannel("");
       setCreatedBy("");
+      setTags([]);
     }
   }, [existingBlock]);
 
@@ -65,6 +66,7 @@ export const BlockForm: React.FC<BlockFormProps> = ({
       tags,
     });
   };
+  console.log("tags", tags);
 
   return (
     <form onSubmit={handleSubmit} className="p-2">

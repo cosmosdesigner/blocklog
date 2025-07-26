@@ -3,17 +3,25 @@ import { useCallback } from "react";
 
 export default function () {
   const generateRandomHexColor = useCallback((): string => {
-    // Generate a random number between 0 and 16777215 (FFFFFF in decimal)
-    // Convert it to a hexadecimal string, and pad with leading zeros if necessary
-    // to ensure it's always 6 characters long.
-    return (
-      "#" +
-      Math.floor(Math.random() * 0xffffff)
+    let color: string;
+    let luminance: number;
+
+    do {
+      color = Math.floor(Math.random() * 0xffffff)
         .toString(16)
-        .padStart(6, "0")
-    );
-    [6, 9, 10, 11, 12];
-  }, []); // The empty dependency array ensures this function is memoized and doesn't change on re-renders.
+        .padStart(6, "0");
+
+      // Calculate relative luminance
+      const r = parseInt(color.slice(0, 2), 16);
+      const g = parseInt(color.slice(2, 4), 16);
+      const b = parseInt(color.slice(4, 6), 16);
+
+      // Using formula for relative luminance (sRGB)
+      luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    } while (luminance > 0.5); // Keep trying until the color is dark enough
+
+    return `#${color}`;
+  }, []);
 
   return { generateRandomHexColor };
 }

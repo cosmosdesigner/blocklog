@@ -39,17 +39,15 @@ export const TagInput: React.FC<TagInputProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { generateRandomHexColor } = useRandomColor();
+  console.log("inputValue-> ", inputValue);
 
   const availableSuggestions = useMemo(() => {
     if (!inputValue.trim()) return [];
     const lowerInputValue = inputValue.trim().toLowerCase();
-    return allTags
-      .filter(
-        (tag) =>
-          !tags.includes(tag) &&
-          tag.title.toLowerCase().includes(lowerInputValue)
-      )
-      .slice(0, 7); // Show up to 7 suggestions
+    return allTags.filter(
+      (tag) =>
+        !tags.includes(tag) && tag.title.toLowerCase().includes(lowerInputValue)
+    );
   }, [inputValue, allTags, tags]);
 
   const addTag = (tagToAdd: Tag) => {
