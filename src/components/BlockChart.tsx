@@ -9,7 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { Block } from "../types";
+import { Block } from "../../types";
 import {
   calculateDuration,
   formatDuration,

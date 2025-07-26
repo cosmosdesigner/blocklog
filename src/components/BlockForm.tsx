@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Block, Tag } from "../types";
+import { Block, Tag } from "../../types";
 import { Button } from "./Button";
 import { TagInput } from "./TagInput";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useLocalStorage } from "@/src/hooks/useLocalStorage";
 
 interface BlockFormProps {
   onSave: (blockData: Omit<Block, "id" | "resolved">) => void;

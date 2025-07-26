@@ -1,4 +1,4 @@
-import useRandomColor from "@/hooks/useRandomColor";
+import useRandomColor from "@/src/hooks/useRandomColor";
 import { Tag } from "@/types";
 import React, { useState, useMemo, useRef, useEffect } from "react";
 

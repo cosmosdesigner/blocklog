@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Block } from "../types";
+import { Block } from "../../types";
 import { getDaysInRange } from "../lib/utils";
 
 const MONTH_NAMES = [

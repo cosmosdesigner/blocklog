@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useRef } from "react";
-import { Block } from "../types";
+import { Block } from "../../types";
 import {
   calculateDuration,
   formatDuration,
@@ -27,9 +27,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
   const stats = useMemo(() => {
     const totalBlocks = blocks.length;
-   const ongoingBlocks = blocks.filter(b => !b.resolved).length;
+    const ongoingBlocks = blocks.filter((b) => !b.resolved).length;
 
-   const totalBlockedHours = blocks.reduce((acc, block) => {
+    const totalBlockedHours = blocks.reduce((acc, block) => {
       return acc + calculateDuration(block.created, block.resolved).totalHours;
     }, 0);
 

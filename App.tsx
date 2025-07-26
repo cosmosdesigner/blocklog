@@ -1,11 +1,11 @@
 import React, { useMemo } from "react";
-import { Header } from "./components/Header";
-import { Dashboard } from "./components/Dashboard";
-import { BlockList } from "./components/BlockList";
-import { Modal } from "./components/Modal";
-import { BlockForm } from "./components/BlockForm";
-import { BlockDetails } from "./components/BlockDetails";
-import useBlocks from "./hooks/useBlocks";
+import { Header } from "./src/components/Header";
+import { Dashboard } from "./src/components/Dashboard";
+import { BlockList } from "./src/components/BlockList";
+import { Modal } from "./src/components/Modal";
+import { BlockForm } from "./src/components/BlockForm";
+import { BlockDetails } from "./src/components/BlockDetails";
+import useBlocks from "./src/hooks/useBlocks";
 import { Tag } from "./types";
 
 const App: React.FC = () => {
