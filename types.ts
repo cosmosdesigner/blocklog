@@ -14,3 +14,8 @@ export interface Tag {
   title: string;
   color: string;
 }
+
+export enum BlockStatus {
+  ONGOING = "Ongoing",
+  RESOLVED = "Resolved",
+}

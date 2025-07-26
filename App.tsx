@@ -47,6 +47,7 @@ const App: React.FC = () => {
           onResolve={handleResolveBlock}
           onDelete={handleDeleteBlock}
           onEdit={handleEditBlock}
+          allUniqueTags={allUniqueTags}
         />
       </main>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
