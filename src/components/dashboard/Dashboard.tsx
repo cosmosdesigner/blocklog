@@ -12,6 +12,7 @@ import { StatCard } from "./components/StatCard";
 import { BlockChart } from "./components/BlockChart";
 import { Button } from "../Button";
 import { YearView } from "../yearView/YearView";
+import { TagAnalysisWidget } from "./components/TagAnalytical";
 
 interface DashboardProps {
   blocks: Block[];
@@ -207,6 +208,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           <YearView blocks={blocks} />
         )}
       </div>
+      <TagAnalysisWidget blocks={blocks} />
     </section>
   );
 };
