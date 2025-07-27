@@ -107,11 +107,11 @@ The project is organized into a modular structure with a clear separation of con
 
   - ✅ Implement a **tag system** to allow users to categorize blockers during creation (e.g., "Dependency," "Technical Debt," "Awaiting Review").
   - ✅ Introduce advanced **filtering by tags** in the history view, making it easy to sort and find specific types of blockers.
-  - ✅ Create a new dashboard widget to analyze **total time blocked by category**, revealing the most significant sources of friction and a AI suggestionto minimize souce of friction.
+  - ✅ Create a new dashboard widget to analyze **total time blocked by category**, revealing the most significant sources of friction.
 
 - **AI-Powered Unblocker Assistant:**
 
-  - Integrate a large language model (LLM) like Gemini to provide proactive help. When a user logs a block, the AI could analyze the title and reason to:
+  - ✅ Integrate a large language model (LLM) like Gemini to provide proactive help. When a user logs a block, the AI could analyze the title and reason to:
     - Suggest potential solutions or troubleshooting steps.
     - Link to relevant internal documentation or public resources.
     - Identify similar past blockers and their resolutions.
