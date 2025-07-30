@@ -21,3 +21,26 @@ export const DAY_NAMES_SHORT = [
   "Fri",
   "Sat",
 ];
+
+export const appContextInitialData = {
+  blocks: [],
+  allUniqueTags: [],
+  stats: {
+    totalBlocks: 0,
+    ongoingBlocks: 0,
+    totalBlockedHours: 0,
+    longestBlock: 0,
+  },
+  isModalOpen: false,
+  editingBlock: null,
+  handleOpenModal: () => {},
+  handleCloseModal: () => {},
+  handleSaveBlock: () => {},
+  handleResolveBlock: () => {},
+  handleDeleteBlock: () => {},
+  viewingBlock: null,
+  handleCloseDetailsModal: () => {},
+  handleEditBlock: () => {},
+  handleViewBlockDetails: () => {},
+  setBlocks: () => {},
+};

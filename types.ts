@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export interface Block {
   id: string;
   title: string;
@@ -18,4 +20,27 @@ export interface Tag {
 export enum BlockStatus {
   ONGOING = "Ongoing",
   RESOLVED = "Resolved",
+}
+
+export interface AppContextType {
+  blocks: Block[];
+  allUniqueTags: Tag[];
+  stats: {
+    totalBlocks: number;
+    ongoingBlocks: number;
+    totalBlockedHours: number;
+    longestBlock: number;
+  };
+  isModalOpen: boolean;
+  editingBlock: Block | null;
+  viewingBlock: Block | null;
+  handleOpenModal: () => void;
+  handleCloseModal: () => void;
+  handleCloseDetailsModal: () => void;
+  handleEditBlock: (block: Block) => void;
+  handleViewBlockDetails: (block: Block | null) => void;
+  setBlocks: Dispatch<SetStateAction<Block[]>>;
+  handleSaveBlock: (blockData: Omit<Block, "id" | "resolved">) => void;
+  handleResolveBlock: (id: string) => void;
+  handleDeleteBlock: (id: string) => void;
 }

@@ -1,6 +1,7 @@
-import { Block } from "@/types";
-import { useCallback, useState } from "react";
+import { Block, Tag } from "@/types";
+import { useCallback, useMemo, useState } from "react";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import { calculateDuration } from "@/src/lib/utils";
 
 export default function useBlocks() {
   const [blocks, setBlocks] = useLocalStorage<Block[]>("blocks", []);
@@ -75,6 +76,35 @@ export default function useBlocks() {
   const handleCloseDetailsModal = useCallback(() => {
     setViewingBlock(null);
   }, []);
+  const stats = useMemo(() => {
+    const totalBlockedHours = blocks.reduce(
+      (acc, block) =>
+        acc + calculateDuration(block.created, block.resolved).totalHours,
+      0
+    );
+    const longestBlock = blocks.reduce(
+      (max, block) =>
+        Math.max(
+          max,
+          calculateDuration(block.created, block.resolved).totalHours
+        ),
+      0
+    );
+    return {
+      totalBlocks: blocks.length,
+      ongoingBlocks: blocks.filter((b) => !b.resolved).length,
+      totalBlockedHours: Math.round(totalBlockedHours),
+      longestBlock: Math.round(longestBlock),
+    };
+  }, [blocks]);
+
+  const allUniqueTags = useMemo(() => {
+    const tagSet = new Set<Tag>();
+    blocks.forEach((block) => {
+      (block.tags || []).forEach((tag) => tagSet.add(tag));
+    });
+    return Array.from(tagSet).sort();
+  }, [blocks]);
 
   return {
     blocks,
@@ -90,5 +120,7 @@ export default function useBlocks() {
     handleViewBlockDetails,
     handleCloseDetailsModal,
     handleEditBlock,
+    stats,
+    allUniqueTags,
   };
 }
