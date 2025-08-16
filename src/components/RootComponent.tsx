@@ -32,7 +32,7 @@ const RootComponent = () => {
     handleLogin,
   } = useBlocks();
 
-  // Allow access to login and register routes when not authenticated
+  // Define auth routes that don't need header
   const isAuthRoute = location.pathname === '/login' || location.pathname === '/register';
 
   // Show login form if not authenticated and not on an auth route
@@ -45,7 +45,16 @@ const RootComponent = () => {
     );
   }
 
-  // Show loading state
+  // For auth routes (login/register), render outlet directly without header
+  if (isAuthRoute) {
+    return (
+      <div className="min-h-screen bg-slate-900 font-sans">
+        <Outlet />
+      </div>
+    );
+  }
+
+  // Show loading state for authenticated routes
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-900 flex items-center justify-center">
@@ -72,6 +81,7 @@ const RootComponent = () => {
     handleViewBlockDetails,
   };
 
+  // Render authenticated app with header
   return (
     <AppContext.Provider value={appContextValue}>
       <div className="min-h-screen bg-slate-900 font-sans">
