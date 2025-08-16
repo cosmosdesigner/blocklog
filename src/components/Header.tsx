@@ -17,7 +17,6 @@ const navItems = [
 export const Header: React.FC<HeaderProps> = ({ onLogNewBlock }) => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
@@ -26,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({ onLogNewBlock }) => {
       // Reload the page to reset authentication state
       window.location.reload();
     } catch (error) {
-      console.error('Logout error:', error);
+      console.error("Logout error:", error);
       // Even if logout API fails, clear local state
       window.location.reload();
     }
@@ -78,11 +77,11 @@ export const Header: React.FC<HeaderProps> = ({ onLogNewBlock }) => {
             {isUserMenuOpen && (
               <>
                 {/* Backdrop to close menu */}
-                <div 
-                  className="fixed inset-0 z-10" 
+                <div
+                  className="fixed inset-0 z-10"
                   onClick={() => setIsUserMenuOpen(false)}
                 />
-                
+
                 <div className="absolute right-0 mt-2 w-48 bg-slate-800 border border-slate-700 rounded-md shadow-lg z-20">
                   <div className="py-1">
                     <button
@@ -91,7 +90,7 @@ export const Header: React.FC<HeaderProps> = ({ onLogNewBlock }) => {
                       className="flex items-center w-full px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-white transition-colors disabled:opacity-50"
                     >
                       <LogOut size={16} className="mr-2" />
-                      {isLoggingOut ? 'Logging out...' : 'Logout'}
+                      {isLoggingOut ? "Logging out..." : "Logout"}
                     </button>
                   </div>
                 </div>
