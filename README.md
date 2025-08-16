@@ -1,136 +1,365 @@
-# Blocklog - Productivity & Blocker Analysis Tool
+# Blocklog - Full-Stack Productivity & Blocker Analysis Tool 🚀
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Recharts](https://img.shields.io/badge/Recharts-2C5685?style=for-the-badge&logo=recharts&logoColor=white)
+![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 
-Blocklog is a sophisticated, client-side web application designed to help you track, visualize, and manage "blockers"—events that halt progress on your tasks. By logging the duration and reason for each block, you can gain powerful insights into productivity patterns, identify recurring obstacles, and ultimately reclaim lost time.
+**🌐 Live Application**: `http://45.63.74.179`  
+**🔧 API Endpoints**: `http://45.63.74.179/api`  
+**📚 Backend Repository**: [blocklog-be](https://github.com/cosmosdesigner/blocklog-be)
 
-The application runs entirely in your browser, using `localStorage` for data persistence. This means it's fast, works offline, and keeps your data private to your device.
+Blocklog is a sophisticated **full-stack productivity tracking application** designed to help individuals and teams track, visualize, and manage "blockers"—events that halt progress on tasks. With real-time data synchronization, JWT authentication, and powerful analytics, you can gain deep insights into productivity patterns and reclaim lost time.
+
+The application features a **React frontend** with **NestJS backend**, **PostgreSQL database**, and **production deployment** with Nginx reverse proxy and PM2 process management.
 
 ---
 
 ## ✨ Key Features
 
-### 1. Core Block Management
+### 🔐 **Authentication & Security**
+- **JWT-based Authentication** with secure token management
+- **User Registration & Login** with encrypted password storage
+- **Session Persistence** across browser sessions
+- **Protected Routes** with authentication guards
 
-- **Log New Blocks:** Quickly add new blocks with a title and reason via an intuitive modal.
-- **Live Duration Tracking:** "Ongoing" blocks feature a real-time timer that ticks every second, providing an exact duration in days, hours, minutes, and seconds.
-- **Resolve & Delete:** Mark blocks as "Resolved" to stop the timer or delete them entirely from your history.
-- **Detailed History:** A chronological list displays all blocks, showing status, title, reason, start/end dates, and total duration.
+### 📝 **Block Management**
+- **Real-time Block Creation** with comprehensive details
+- **Live Duration Tracking** with precise timing
+- **Block Resolution** with automatic duration calculation
+- **Tag System** with custom colors and descriptions
+- **Block History** with filtering and search capabilities
 
-### 2. Interactive Dashboard
+### 📊 **Advanced Analytics Dashboard**
+- **Key Performance Metrics**:
+  - Total Blocks count
+  - Ongoing vs Resolved blocks
+  - Total Time Blocked (cumulative)
+  - Longest Block identification
+- **Interactive Data Visualization**:
+  - Monthly bar charts with hover details
+  - Yearly calendar heatmap view
+  - Tag-based analytics and distribution
+  - Time-series trend analysis
 
-The central hub for at-a-glance analytics and data visualization.
+### 🌐 **Full-Stack Integration**
+- **Real-time Data Synchronization** with PostgreSQL
+- **RESTful API** with comprehensive endpoints
+- **Optimistic UI Updates** for smooth user experience
+- **Error Handling** with user-friendly feedback
+- **Data Export/Import** capabilities
 
-- **Key Stat Cards:**
-  - **Total Blocks:** A running count of all blocks logged.
-  - **Ongoing Blocks:** See how many issues are currently active.
-  - **Total Time Blocked:** A precise, cumulative duration of all blocks.
-  - **Longest Block:** Highlights your single most time-consuming blocker.
-- **Interactive Drill-Down:** The "Longest Block" card is clickable, opening a detailed modal view for immediate investigation.
-
-### 3. Advanced Data Visualization
-
-Toggle between two powerful views to analyze your data over time.
-
-- **📊 Monthly Bar Chart:** Aggregates total blocked time per month. Hover over a bar to see a detailed tooltip with the exact duration, making it easy to compare productivity across months.
-- **🗓️ Yearly Calendar View:** A full-year "heatmap" grid where each day with an active block is highlighted. Hovering over a day reveals a tooltip listing the titles of all blocks from that day, perfect for spotting trends and recurring patterns.
-
-### 4. Robust Data Management
-
-Your data is valuable. Blocklog includes essential features for safety and portability.
-
-- **Export to JSON:** Download a complete backup of all your block data into a single `.json` file.
-- **Import from JSON:** Restore your data from a backup file, with a confirmation prompt to prevent accidental data overwrites and validation to ensure data integrity.
+### 🚀 **Production-Ready Deployment**
+- **Live Application** deployed and accessible
+- **Nginx Reverse Proxy** for optimized performance
+- **PM2 Process Management** with auto-restart
+- **PostgreSQL Database** with sample data
+- **SSL-Ready Configuration** for HTTPS deployment
 
 ---
 
-## 🚀 Getting Started
+## 🌐 Live Application
 
-This project is set up with a **buildless** development environment. It uses ES Modules and an `importmap` to load dependencies like React and Recharts directly from a CDN (`esm.sh`).
+### **🎯 Access the Application**
+Visit: **`http://45.63.74.179`**
 
-**No installation or build step is required.**
+### **🔑 Test Credentials**
+- **Email**: `test@example.com`
+- **Password**: `testpassword123`
 
-Simply open the `index.html` file in a modern web browser (like Chrome, Firefox, or Edge) to run the application.
+### **🧪 Sample Data**
+The application comes pre-loaded with:
+- **2 Sample Blocks**: One ongoing, one resolved
+- **2 Tags**: "Testing" (green) and "Development" (orange)
+- **1 Test User**: Ready for immediate login
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Framework:** [React 19](https://react.dev/)
-- **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/) (used via CDN)
-- **Charts:** [Recharts](https://recharts.org/) for responsive data visualizations.
-- **Data Persistence:** Client-side `localStorage` via a custom `useLocalStorage` hook.
-- **Development Environment:** Buildless setup using native browser ES Modules and `importmap`.
+### **Frontend**
+- **Framework**: React 19 with TypeScript
+- **Build Tool**: Vite for fast development and optimized builds
+- **Router**: TanStack Router for type-safe routing
+- **Styling**: Tailwind CSS with custom design system
+- **Charts**: Recharts for responsive data visualizations
+- **State Management**: Custom hooks with API integration
+
+### **Backend Integration**
+- **API**: NestJS RESTful API with TypeORM
+- **Database**: PostgreSQL with structured schema
+- **Authentication**: JWT with Passport.js strategy
+- **Data Layer**: API service layer with data mapping utilities
+
+### **Deployment Infrastructure**
+- **Web Server**: Nginx with reverse proxy configuration
+- **Process Manager**: PM2 for backend service management
+- **Database**: PostgreSQL 14 with optimized indexes
+- **Environment**: Ubuntu server with production optimization
 
 ---
 
-## 📁 File Structure
-
-The project is organized into a modular structure with a clear separation of concerns.
+## 📁 Project Structure
 
 ```
-.
-├── 📄 .gitignore
-├── 📄 README.md
-├── 📄 index.html        # Main HTML entry point, includes CDN scripts and importmap.
-├── 📄 index.tsx         # Root React component renderer.
-├── 📄 App.tsx           # Main application component, manages state and logic.
-├── 📄 metadata.json     # Application metadata.
-├── 📄 types.ts          # Core TypeScript types and enums (Block, BlockStatus).
-├── 📁 components/       # Reusable React components
-│   ├── Button.tsx
-│   ├── BlockCard.tsx
-│   ├── BlockChart.tsx
-│   ├── BlockDetails.tsx
-│   ├── BlockForm.tsx
-│   ├── BlockList.tsx
-│   ├── Dashboard.tsx
-│   ├── Header.tsx
-│   ├── Modal.tsx
-│   ├── StatCard.tsx
-│   └── YearView.tsx
-├── 📁 hooks/
-│   └── useLocalStorage.ts # Custom hook for persisting state to localStorage.
-└── 📁 lib/
-    └── utils.ts         # Helper functions for date/time calculation, formatting, and validation.
+blocklog/
+├── 📄 index.html              # Main HTML entry point with Tailwind CDN
+├── 📄 index.tsx               # React application root renderer
+├── 📄 App.tsx                 # Main app component with router setup
+├── 📄 Routes.ts               # TanStack router configuration
+├── 📄 types.ts                # Core TypeScript interfaces and enums
+├── 📄 index.css               # Custom CSS styles and utilities
+├── 📄 vite.config.ts          # Vite build configuration
+├── 📄 package.json            # Dependencies and scripts
+├── 📄 tsconfig.json           # TypeScript configuration
+│
+├── 📁 src/
+│   ├── 📁 components/         # React components library
+│   │   ├── 📁 auth/           # Authentication components
+│   │   │   └── LoginForm.tsx          # JWT login form with validation
+│   │   ├── 📁 dashboard/      # Dashboard and analytics
+│   │   │   ├── Dashboard.tsx          # Main dashboard container
+│   │   │   ├── 📁 components/         # Dashboard widgets
+│   │   │   │   ├── BlockChart.tsx     # Monthly/yearly visualizations
+│   │   │   │   ├── StatCard.tsx       # Metric display cards
+│   │   │   │   └── TagAnalytical.tsx  # Tag-based analytics
+│   │   │   └── 📁 hooks/              # Dashboard-specific hooks
+│   │   │       └── useBlocks.tsx      # API-integrated block management
+│   │   ├── 📁 yearView/       # Calendar visualization
+│   │   │   ├── YearView.tsx           # Yearly calendar container
+│   │   │   ├── 📁 components/         # Calendar components
+│   │   │   │   ├── Calendar.tsx       # Main calendar grid
+│   │   │   │   ├── Month.tsx          # Month view component
+│   │   │   │   ├── dayCell.tsx        # Individual day cells
+│   │   │   │   └── calendarEmptyState.tsx  # Empty state handling
+│   │   │   └── 📁 hooks/              # Calendar-specific hooks
+│   │   │       └── useYearView.tsx    # Calendar data management
+│   │   ├── BlockCard.tsx      # Individual block display component
+│   │   ├── BlockDetails.tsx   # Block detail modal with actions
+│   │   ├── BlockForm.tsx      # Block creation/editing form
+│   │   ├── BlockList.tsx      # Block listing with filters
+│   │   ├── FilterControls.tsx # Advanced filtering interface
+│   │   ├── Header.tsx         # Application header with navigation
+│   │   ├── Modal.tsx          # Reusable modal component
+│   │   ├── RootComponent.tsx  # Root app wrapper with auth
+│   │   ├── TagInput.tsx       # Tag selection and creation
+│   │   └── Button.tsx         # Standardized button component
+│   │
+│   ├── 📁 services/           # API integration layer
+│   │   ├── api.ts             # Complete API client with endpoints
+│   │   └── dataMapping.ts     # Frontend/backend data transformers
+│   │
+│   ├── 📁 hooks/              # Reusable React hooks
+│   │   ├── useLocalStorage.ts # Local storage state management
+│   │   ├── UseOnClickOutside.ts # Click outside detection
+│   │   └── useRandomColor.tsx # Color generation utility
+│   │
+│   ├── 📁 routes/             # TanStack Router pages
+│   │   ├── IndexRoute.tsx     # Home page with block list
+│   │   ├── DashboardRoute.tsx # Analytics dashboard page
+│   │   └── DataRoute.tsx      # Data management page
+│   │
+│   └── 📁 lib/                # Utility functions
+│       ├── utils.ts           # Date/time calculations and helpers
+│       └── const.ts           # Application constants
+│
+├── 📁 dist/                   # Production build output
+└── 📁 src-tauri/             # Tauri desktop app configuration (future)
 ```
 
 ---
 
-## 🔮 Future Features & Roadmap
+## 🔗 API Integration
 
-- **Tagging, Categorization & Filtering:**
+### **Authentication Endpoints**
+```typescript
+POST /api/auth/login       // User login with JWT response
+POST /api/auth/register    // User registration
+GET  /api/auth/profile     // Get current user profile
+PUT  /api/auth/profile     // Update user profile
+```
 
-  - ✅ Implement a **tag system** to allow users to categorize blockers during creation (e.g., "Dependency," "Technical Debt," "Awaiting Review").
-  - ✅ Introduce advanced **filtering by tags** in the history view, making it easy to sort and find specific types of blockers.
-  - ✅ Create a new dashboard widget to analyze **total time blocked by category**, revealing the most significant sources of friction.
+### **Block Management**
+```typescript
+GET    /api/blocks              // List all blocks (paginated, filterable)
+POST   /api/blocks              // Create new block
+GET    /api/blocks/:id          // Get specific block details
+PUT    /api/blocks/:id          // Update block information
+PATCH  /api/blocks/:id/resolve  // Mark block as resolved
+DELETE /api/blocks/:id          // Delete block
+```
 
-- **AI-Powered Unblocker Assistant:**
+### **Tag System**
+```typescript
+GET    /api/tags           // List all user tags
+POST   /api/tags           // Create new tag
+GET    /api/tags/stats     // Get tag usage statistics
+PUT    /api/tags/:id       // Update tag details
+DELETE /api/tags/:id       // Delete tag
+```
 
-  - ✅ Integrate a large language model (LLM) like Gemini to provide proactive help. When a user logs a block, the AI could analyze the title and reason to:
-    - Suggest potential solutions or troubleshooting steps.
-    - Link to relevant internal documentation or public resources.
-    - Identify similar past blockers and their resolutions.
+### **Analytics & Reporting**
+```typescript
+GET /api/analytics/dashboard    // Dashboard statistics
+GET /api/analytics/monthly     // Monthly aggregated data
+GET /api/analytics/daily       // Daily breakdown
+GET /api/analytics/export      // Export user data
+```
 
-- **Native Desktop Application:**
+---
 
-  - Package the application using **Tauri** or **Electron** to create a native desktop experience for Windows, macOS, and Linux. This would offer better OS integration, offline reliability, and system tray functionality.
+## 🚀 Development Setup
 
-- **Team Collaboration & Cloud Sync:**
+### **Prerequisites**
+- Node.js 18+
+- Git
 
-  - Move beyond `localStorage` to an optional cloud-based backend (like Firebase or Supabase) to enable:
-    - **Team-shared blocklogs:** Allow teams to see a unified view of all member blockers.
-    - **Cross-device sync:** Access your Blocklog from any device.
+### **Quick Start**
+```bash
+# Clone the repository
+git clone https://github.com/cosmosdesigner/blocklog.git
+cd blocklog
 
-- **Integrations with Developer Tools:**
+# Install dependencies
+npm install
 
-  - Connect Blocklog to popular platforms like **Jira, GitHub, or Slack**.
-  - For example, automatically log a blocker when a Jira ticket is moved to a "Blocked" column, or resolve it based on a GitHub commit message.
+# Start development server
+npm run dev
 
-- **Reporting & Goal Setting:**
-  - Generate exportable weekly or monthly Excel and/or PDF reports summarizing key metrics and trends.
-  - Allow users or teams to set goals for reducing total blocked time and track their progress.
+# Build for production
+npm run build
+```
+
+### **Environment Configuration**
+The application automatically connects to the production API. For local development with a custom backend:
+
+1. Update `src/services/api.ts`:
+```typescript
+const API_BASE_URL = 'http://localhost:3001'; // Your local backend
+```
+
+2. Ensure CORS is configured in your backend for your development URL.
+
+---
+
+## 🔧 Production Deployment
+
+The application is deployed using modern DevOps practices:
+
+### **Architecture**
+```
+[Browser] → [Nginx:80] → [React Frontend]
+                      ↓ /api/*
+[Browser] → [Nginx:80] → [Nginx Proxy] → [NestJS:3001] → [PostgreSQL:5432]
+```
+
+### **Deployment Features**
+- **✅ Auto-SSL Ready**: Configured for Let's Encrypt integration
+- **✅ Process Management**: PM2 handles backend processes with auto-restart
+- **✅ Reverse Proxy**: Nginx optimizes static assets and API routing
+- **✅ Database Optimization**: PostgreSQL with proper indexing
+- **✅ Monitoring**: Comprehensive logging and error tracking
+- **✅ Security**: Proper CORS, headers, and authentication
+
+### **Performance Optimizations**
+- Gzip compression for static assets
+- Browser caching for optimal loading
+- Optimistic UI updates for instant feedback
+- Efficient database queries with proper indexes
+- CDN-ready static asset serving
+
+---
+
+## 🧪 Testing & Quality Assurance
+
+### **Manual Testing Checklist**
+- ✅ User registration and login flow
+- ✅ Block creation with tags and validation
+- ✅ Real-time duration tracking accuracy
+- ✅ Block resolution and deletion
+- ✅ Dashboard analytics and visualizations
+- ✅ Data export/import functionality
+- ✅ Responsive design across devices
+- ✅ API error handling and recovery
+
+### **Browser Compatibility**
+- ✅ Chrome/Chromium 90+
+- ✅ Firefox 90+
+- ✅ Safari 14+
+- ✅ Edge 90+
+
+---
+
+## 🔮 Roadmap & Future Enhancements
+
+### **🏃‍♂️ In Progress**
+- **Team Collaboration Features**
+  - Shared workspaces for team block visibility
+  - Role-based permissions and access control
+  - Team analytics and comparative insights
+
+### **🎯 Planned Features**
+- **AI-Powered Assistant**
+  - Intelligent block resolution suggestions
+  - Pattern recognition and proactive insights
+  - Integration with Google Gemini AI
+  
+- **Advanced Integrations**
+  - Jira, GitHub, and Slack connectivity
+  - Calendar integration for time blocking
+  - Slack notifications and bot commands
+  
+- **Enhanced Analytics**
+  - Custom reporting and PDF exports
+  - Goal setting and progress tracking
+  - Productivity trend predictions
+
+### **🔧 Technical Improvements**
+- **Desktop Application** (Tauri-based)
+- **Mobile Application** (React Native)
+- **Real-time Collaboration** (WebSocket integration)
+- **Advanced Security** (2FA, SSO integration)
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Here's how to get started:
+
+1. **Fork the repository**
+2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
+3. **Make your changes** with proper TypeScript types
+4. **Test thoroughly** including API integration
+5. **Commit with conventional commits**: `git commit -m "feat: add amazing feature"`
+6. **Push to your branch**: `git push origin feature/amazing-feature`
+7. **Open a Pull Request** with detailed description
+
+### **Development Guidelines**
+- Follow TypeScript best practices
+- Maintain component modularity
+- Write descriptive commit messages
+- Test API integrations thoroughly
+- Update documentation for new features
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- **NestJS Team** for the robust backend framework
+- **React Team** for the powerful frontend library
+- **Tailwind CSS** for the elegant styling system
+- **Recharts** for beautiful data visualizations
+- **PostgreSQL** for reliable data persistence
+
+---
+
+**🚀 Built with ❤️ for productivity enthusiasts and development teams**
+
+*Transform your blockers into breakthroughs with Blocklog - because every obstacle is an opportunity for improvement.*
