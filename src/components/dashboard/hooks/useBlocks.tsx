@@ -1,7 +1,11 @@
 import { Block, Tag } from "@/types";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { blocksAPI, tagsAPI, getToken } from "../../../services/api";
-import { mapBackendBlockToFrontend, mapBackendTagToFrontend, prepareBlockForAPI, BackendTag } from "../../../services/dataMapping";
+import {
+  mapBackendBlockToFrontend,
+  prepareBlockForAPI,
+  BackendTag,
+} from "../../../services/dataMapping";
 import { calculateDuration } from "@/src/lib/utils";
 
 export default function useBlocks() {
@@ -22,26 +26,26 @@ export default function useBlocks() {
   // Load data from API
   const loadData = useCallback(async () => {
     if (!isAuthenticated) return;
-    
+
     try {
       setLoading(true);
-      
+
       // Load blocks and tags in parallel
       const [blocksResponse, tagsResponse] = await Promise.all([
         blocksAPI.getAll(),
-        tagsAPI.getAll()
+        tagsAPI.getAll(),
       ]);
-      
+
       // Map backend data to frontend format
       const mappedBlocks = blocksResponse.data.map(mapBackendBlockToFrontend);
       const mappedTags = tagsResponse;
-      
+
       setBlocks(mappedBlocks);
       setBackendTags(mappedTags);
     } catch (error) {
-      console.error('Failed to load data:', error);
+      console.error("Failed to load data:", error);
       // If unauthorized, clear auth state
-      if (error.message === 'Unauthorized') {
+      if (error.message === "Unauthorized") {
         setIsAuthenticated(false);
       }
     } finally {
@@ -78,12 +82,12 @@ export default function useBlocks() {
           const preparedData = prepareBlockForAPI(blockData, backendTags);
           await blocksAPI.create(preparedData);
         }
-        
+
         // Reload data to get updated list
         await loadData();
         handleCloseModal();
       } catch (error) {
-        console.error('Failed to save block:', error);
+        console.error("Failed to save block:", error);
         // Handle error - could show toast notification
       }
     },
@@ -106,7 +110,7 @@ export default function useBlocks() {
           )
         );
       } catch (error) {
-        console.error('Failed to resolve block:', error);
+        console.error("Failed to resolve block:", error);
         // Reload data to sync with server
         loadData();
       }
@@ -121,7 +125,7 @@ export default function useBlocks() {
         // Update local state immediately
         setBlocks((prev) => prev.filter((b) => b.id !== id));
       } catch (error) {
-        console.error('Failed to delete block:', error);
+        console.error("Failed to delete block:", error);
         // Reload data to sync with server
         loadData();
       }

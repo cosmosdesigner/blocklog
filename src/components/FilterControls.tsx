@@ -3,55 +3,7 @@ import React, { useState, useRef } from "react";
 import { Button } from "./Button";
 import { useOnClickOutside } from "../hooks/UseOnClickOutside";
 import { BlockStatus, Tag } from "@/types";
-
-const ChevronDownIcon = ({ className }: { className?: string }) => (
-  <svg
-    className={className}
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 20 20"
-    fill="currentColor"
-  >
-    <path
-      fillRule="evenodd"
-      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-      clipRule="evenodd"
-    />
-  </svg>
-);
-
-const FilterIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-  </svg>
-);
-
-const XCircleIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <circle cx="12" cy="12" r="10"></circle>
-    <line x1="15" y1="9" x2="9" y2="15"></line>
-    <line x1="9" y1="9" x2="15" y2="15"></line>
-  </svg>
-);
+import { ChevronDown, Filter, XCircle } from "lucide-react";
 
 const sortOptions = [
   { value: "startDate-desc", label: "Start Date (Newest)" },
@@ -124,7 +76,7 @@ export const FilterControls: React.FC<FilterControlsProps> = ({
           className="w-full sm:w-auto flex items-center justify-between bg-slate-700 hover:bg-slate-600 text-slate-300 px-3 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-brand-primary"
         >
           <span>{getSelectedSortLabel()}</span>
-          <ChevronDownIcon
+          <ChevronDown
             className={`ml-2 h-5 w-5 transition-transform ${
               isSortOpen ? "rotate-180" : ""
             }`}
@@ -163,7 +115,7 @@ export const FilterControls: React.FC<FilterControlsProps> = ({
           className="w-full sm:w-auto flex items-center justify-between bg-slate-700 hover:bg-slate-600 text-slate-300 px-3 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-brand-primary"
         >
           <span>{getSelectedStatusLabel()}</span>
-          <ChevronDownIcon
+          <ChevronDown
             className={`ml-2 h-5 w-5 transition-transform ${
               isStatusOpen ? "rotate-180" : ""
             }`}
@@ -201,13 +153,13 @@ export const FilterControls: React.FC<FilterControlsProps> = ({
           onClick={() => setTagsOpen(!isTagsOpen)}
           className="w-full sm:w-auto flex items-center justify-between bg-slate-700 hover:bg-slate-600 text-slate-300 px-3 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-brand-primary"
         >
-          <FilterIcon />
+          <Filter size={16} />
           <span className="ml-2">
             {selectedTags.length > 0
               ? `Tags (${selectedTags.length})`
               : "Filter by Tags"}
           </span>
-          <ChevronDownIcon
+          <ChevronDown
             className={`ml-2 h-5 w-5 transition-transform ${
               isTagsOpen ? "rotate-180" : ""
             }`}
@@ -247,7 +199,7 @@ export const FilterControls: React.FC<FilterControlsProps> = ({
           onClick={onClearFilters}
           className="bg-transparent hover:bg-slate-700 text-slate-400 border border-slate-600"
         >
-          <XCircleIcon /> <span className="ml-1.5">Clear</span>
+          <XCircle size={16} /> <span className="ml-1.5">Clear</span>
         </Button>
       )}
     </div>

@@ -9,57 +9,11 @@ import {
   Cell,
 } from "recharts";
 import { GoogleGenAI } from "@google/genai";
+import { Brain, Loader2 } from "lucide-react";
 
 import { Button } from "../../Button";
 import { calculateDuration } from "@/src/lib/utils";
 import { Block } from "@/types";
-
-const AIBrainIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v0A2.5 2.5 0 0 1 9.5 7v0A2.5 2.5 0 0 1 7 4.5v0A2.5 2.5 0 0 1 9.5 2Z" />
-    <path d="M14.5 2A2.5 2.5 0 0 1 17 4.5v0A2.5 2.5 0 0 1 14.5 7v0A2.5 2.5 0 0 1 12 4.5v0A2.5 2.5 0 0 1 14.5 2Z" />
-    <path d="M12 17.5a2.5 2.5 0 0 1-2.5-2.5v0A2.5 2.5 0 0 1 12 12.5v0a2.5 2.5 0 0 1 2.5 2.5v0a2.5 2.5 0 0 1-2.5 2.5Z" />
-    <path d="M20 10.5c0 1.2-4 2-8 2s-8-0.8-8-2" />
-    <path d="M20 10.5v1c0 1.2-4 2-8 2s-8-0.8-8-2v-1" />
-    <path d="M4 10.5c0-1.2 4-2 8-2s8 0.8 8 2" />
-    <path d="M4.5 10.5c-1.5 0-2.5-1-2.5-2.5V8" />
-    <path d="M19.5 10.5c1.5 0 2.5-1 2.5-2.5V8" />
-    <path d="M4.5 15a2.5 2.5 0 0 1-2.5-2.5V12" />
-    <path d="M19.5 15a2.5 2.5 0 0 0 2.5-2.5V12" />
-  </svg>
-);
-const LoadingSpinner = () => (
-  <svg
-    className="animate-spin h-5 w-5 text-white"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-  >
-    <circle
-      className="opacity-25"
-      cx="12"
-      cy="12"
-      r="10"
-      stroke="currentColor"
-      strokeWidth="4"
-    ></circle>
-    <path
-      className="opacity-75"
-      fill="currentColor"
-      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-    ></path>
-  </svg>
-);
 
 const COLORS = ["#0ea5e9", "#6366f1", "#ec4899", "#f97316", "#10b981"];
 
@@ -213,7 +167,7 @@ ${dataSummary}`;
         {/* AI Analysis Section */}
         <div className="md:col-span-2 flex flex-col justify-start items-start p-4 bg-slate-900/50 rounded-lg">
           <div className="flex items-center gap-2 mb-3">
-            <AIBrainIcon />
+            <Brain size={16} />
             <h4 className="text-lg font-semibold text-white">
               AI-Powered Insight
             </h4>
@@ -221,7 +175,7 @@ ${dataSummary}`;
 
           {loading && (
             <div className="flex flex-col items-center justify-center w-full flex-grow text-slate-400">
-              <LoadingSpinner />
+              <Loader2 className="animate-spin h-5 w-5 text-white" />
               <p className="mt-2 text-sm">Analyzing...</p>
             </div>
           )}

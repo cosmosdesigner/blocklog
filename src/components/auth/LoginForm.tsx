@@ -1,29 +1,32 @@
-import React, { useState } from 'react';
-import { authAPI } from '../../services/api';
-import { Button } from '../Button';
+import React, { useState } from "react";
+import { authAPI } from "../../services/api";
+import { Button } from "../Button";
 
 interface LoginFormProps {
   onSuccess: () => void;
   onSwitchToRegister?: () => void;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onSwitchToRegister }) => {
-  const [email, setEmail] = useState('test@example.com');
-  const [password, setPassword] = useState('testpassword123');
+export const LoginForm: React.FC<LoginFormProps> = ({
+  onSuccess,
+  onSwitchToRegister,
+}) => {
+  const [email, setEmail] = useState("test@example.com");
+  const [password, setPassword] = useState("testpassword123");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
       await authAPI.login(email, password);
       onSuccess();
     } catch (err: any) {
-      setError(err?.message || 'Login failed. Please check your credentials.');
-      console.error('Login error:', err);
+      setError(err?.message || "Login failed. Please check your credentials.");
+      console.error("Login error:", err);
     } finally {
       setIsLoading(false);
     }
@@ -35,7 +38,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onSwitchToRegis
         <h2 className="text-2xl font-bold text-white text-center mb-6">
           Login to Blocklog
         </h2>
-        
+
         {error && (
           <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3 mb-4">
             <p className="text-red-400 text-sm">{error}</p>
@@ -44,7 +47,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onSwitchToRegis
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-1">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-slate-300 mb-1"
+            >
               Email
             </label>
             <input
@@ -58,7 +64,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onSwitchToRegis
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-1">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-slate-300 mb-1"
+            >
               Password
             </label>
             <input
@@ -77,14 +86,14 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onSwitchToRegis
             className="w-full mt-6"
             variant="primary"
           >
-            {isLoading ? 'Logging in...' : 'Login'}
+            {isLoading ? "Logging in..." : "Login"}
           </Button>
         </form>
 
         {onSwitchToRegister && (
           <div className="mt-6 text-center">
             <p className="text-slate-400 text-sm">
-              Don't have an account?{' '}
+              Don't have an account?{" "}
               <button
                 type="button"
                 onClick={onSwitchToRegister}
@@ -97,11 +106,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onSwitchToRegis
         )}
 
         <div className="mt-6 p-4 bg-slate-700/50 rounded-lg">
-          <p className="text-sm text-slate-400 text-center">
-            Test Account:
-          </p>
+          <p className="text-sm text-slate-400 text-center">Test Account:</p>
           <p className="text-sm text-slate-300 text-center">
-            Email: test@example.com<br />
+            Email: test@example.com
+            <br />
             Password: testpassword123
           </p>
         </div>

@@ -1,15 +1,16 @@
 import { Header } from "./Header";
-import { Outlet, useNavigate } from "@tanstack/react-router";
+import { Outlet, useNavigate, useLocation } from "@tanstack/react-router";
 import { Modal } from "./Modal";
 import { BlockForm } from "./BlockForm";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-import { AppContext, rootRoute, useAppContext } from "@/Routes";
+import { AppContext } from "@/Routes";
 import useBlocks from "./dashboard/hooks/useBlocks";
 import { AppContextType } from "@/types";
 import { LoginForm } from "./auth/LoginForm";
 
 const RootComponent = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const {
     blocks,
     handleCloseDetailsModal,
@@ -31,10 +32,13 @@ const RootComponent = () => {
     handleLogin,
   } = useBlocks();
 
-  // Show login form if not authenticated
-  if (!isAuthenticated) {
+  // Allow access to login and register routes when not authenticated
+  const isAuthRoute = location.pathname === '/login' || location.pathname === '/register';
+
+  // Show login form if not authenticated and not on an auth route
+  if (!isAuthenticated && !isAuthRoute) {
     return (
-      <LoginForm 
+      <LoginForm
         onSuccess={handleLogin}
         onSwitchToRegister={() => navigate({ to: "/register" })}
       />
@@ -67,7 +71,7 @@ const RootComponent = () => {
     handleCloseDetailsModal,
     handleViewBlockDetails,
   };
-  
+
   return (
     <AppContext.Provider value={appContextValue}>
       <div className="min-h-screen bg-slate-900 font-sans">

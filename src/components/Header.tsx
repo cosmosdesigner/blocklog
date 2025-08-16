@@ -2,81 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Button } from "./Button";
 import { authAPI } from "../services/api";
+import { Plus, LogOut, User, ChevronDown, SquarePlus } from "lucide-react";
 
 interface HeaderProps {
   onLogNewBlock: () => void;
 }
-
-const PlusIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="mr-2"
-  >
-    <line x1="12" y1="5" x2="12" y2="19"></line>
-    <line x1="5" y1="12" x2="19" y2="12"></line>
-  </svg>
-);
-
-const LogoutIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="mr-2"
-  >
-    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-    <polyline points="16,17 21,12 16,7"></polyline>
-    <line x1="21" y1="12" x2="9" y2="12"></line>
-  </svg>
-);
-
-const UserIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-    <circle cx="12" cy="7" r="4"></circle>
-  </svg>
-);
-
-const ChevronDownIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="ml-1"
-  >
-    <polyline points="6,9 12,15 18,9"></polyline>
-  </svg>
-);
 
 const navItems = [
   { id: "blocks", label: "Blocks", to: "/" },
@@ -107,22 +37,7 @@ export const Header: React.FC<HeaderProps> = ({ onLogNewBlock }) => {
       <div className="container mx-auto flex items-center justify-between p-4">
         <div className="flex items-center space-x-8">
           <div className="flex items-center space-x-2 flex-shrink-0">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-brand-primary"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="12" y1="8" x2="12" y2="16"></line>
-              <line x1="8" y1="12" x2="16" y2="12"></line>
-            </svg>
+            <SquarePlus size={28} className="text-brand-primary" />
             <h1 className="text-2xl font-bold text-white">Blocklog</h1>
           </div>
           <nav className="hidden md:flex items-center gap-2">
@@ -143,7 +58,7 @@ export const Header: React.FC<HeaderProps> = ({ onLogNewBlock }) => {
 
         <div className="flex items-center space-x-3">
           <Button onClick={onLogNewBlock}>
-            <PlusIcon />
+            <Plus size={20} className="mr-2" />
             <span className="hidden sm:inline">Log New Block</span>
             <span className="sm:hidden">New</span>
           </Button>
@@ -154,9 +69,9 @@ export const Header: React.FC<HeaderProps> = ({ onLogNewBlock }) => {
               onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
               className="flex items-center px-3 py-2 text-sm text-slate-300 hover:text-white hover:bg-slate-700/50 rounded-md transition-colors"
             >
-              <UserIcon />
+              <User size={20} />
               <span className="hidden sm:inline ml-1">Account</span>
-              <ChevronDownIcon />
+              <ChevronDown size={16} className="ml-1" />
             </button>
 
             {/* Dropdown Menu */}
@@ -175,7 +90,7 @@ export const Header: React.FC<HeaderProps> = ({ onLogNewBlock }) => {
                       disabled={isLoggingOut}
                       className="flex items-center w-full px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-white transition-colors disabled:opacity-50"
                     >
-                      <LogoutIcon />
+                      <LogOut size={16} className="mr-2" />
                       {isLoggingOut ? 'Logging out...' : 'Logout'}
                     </button>
                   </div>
