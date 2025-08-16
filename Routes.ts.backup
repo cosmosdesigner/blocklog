@@ -11,8 +11,6 @@ import { appContextInitialData } from "./src/lib/const";
 import { dashboardRoute } from "./src/routes/DashboardRoute";
 import { dataRoute } from "./src/routes/DataRoute";
 import { indexRoute } from "./src/routes/IndexRoute";
-import { loginRoute } from "./src/routes/LoginRoute";
-import { registerRoute } from "./src/routes/RegisterRoute";
 import { createContext, useContext } from "react";
 
 export const AppContext = createContext<AppContextType | null>(null);
@@ -24,7 +22,6 @@ export const useAppContext = () => {
   }
   return context;
 };
-
 export const rootRoute = createRootRoute({
   component: RootComponent,
 });
@@ -33,8 +30,6 @@ const routeTree = rootRoute.addChildren([
   indexRoute,
   dashboardRoute,
   dataRoute,
-  loginRoute,
-  registerRoute,
 ]);
 
 export const router = createRouter({

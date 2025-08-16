@@ -1,5 +1,5 @@
 import { Header } from "./Header";
-import { Outlet } from "@tanstack/react-router";
+import { Outlet, useNavigate } from "@tanstack/react-router";
 import { Modal } from "./Modal";
 import { BlockForm } from "./BlockForm";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
@@ -9,6 +9,7 @@ import { AppContextType } from "@/types";
 import { LoginForm } from "./auth/LoginForm";
 
 const RootComponent = () => {
+  const navigate = useNavigate();
   const {
     blocks,
     handleCloseDetailsModal,
@@ -32,7 +33,12 @@ const RootComponent = () => {
 
   // Show login form if not authenticated
   if (!isAuthenticated) {
-    return <LoginForm onSuccess={handleLogin} />;
+    return (
+      <LoginForm 
+        onSuccess={handleLogin}
+        onSwitchToRegister={() => navigate({ to: "/register" })}
+      />
+    );
   }
 
   // Show loading state

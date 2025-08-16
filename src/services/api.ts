@@ -1,6 +1,50 @@
 // API configuration and utilities
 const API_BASE_URL = '/api';
 
+// API Error types
+export interface ApiError {
+  message: string;
+  code?: string;
+  statusCode?: number;
+  details?: any;
+}
+
+export class ApiException extends Error {
+  public statusCode: number;
+  public code?: string;
+  public details?: any;
+
+  constructor(message: string, statusCode: number, code?: string, details?: any) {
+    super(message);
+    this.name = 'ApiException';
+    this.statusCode = statusCode;
+    this.code = code;
+    this.details = details;
+  }
+}
+
+// User types
+export interface User {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AuthResponse {
+  user: User;
+  accessToken: string;
+}
+
+export interface RegisterRequest {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+}
+
 // Token management
 export const getToken = (): string | null => {
   return localStorage.getItem('authToken');
@@ -31,36 +75,64 @@ const apiRequest = async <T>(
     headers.Authorization = `Bearer ${token}`;
   }
   
-  const response = await fetch(url, {
-    ...options,
-    headers,
-  });
-  
-  if (!response.ok) {
-    if (response.status === 401) {
-      removeToken();
-      // Redirect to login or refresh token
-      window.location.href = '/login';
-      throw new Error('Unauthorized');
+  try {
+    const response = await fetch(url, {
+      ...options,
+      headers,
+    });
+    
+    const contentType = response.headers.get('content-type');
+    const hasJsonContent = contentType && contentType.includes('application/json');
+    
+    let responseData: any;
+    if (hasJsonContent) {
+      responseData = await response.json();
+    } else {
+      responseData = await response.text();
     }
-    throw new Error(`HTTP error! status: ${response.status}`);
+    
+    if (!response.ok) {
+      // Handle specific error responses
+      let errorMessage = 'An error occurred';
+      let errorCode: string | undefined;
+      let errorDetails: any;
+      
+      if (hasJsonContent && responseData) {
+        errorMessage = responseData.message || responseData.error || errorMessage;
+        errorCode = responseData.code;
+        errorDetails = responseData.details;
+      } else if (typeof responseData === 'string') {
+        errorMessage = responseData;
+      }
+      
+      if (response.status === 401) {
+        removeToken();
+        // Don't redirect automatically, let components handle it
+        throw new ApiException('Authentication required', response.status, 'UNAUTHORIZED');
+      }
+      
+      throw new ApiException(errorMessage, response.status, errorCode, errorDetails);
+    }
+    
+    return hasJsonContent ? responseData : responseData as T;
+  } catch (error) {
+    if (error instanceof ApiException) {
+      throw error;
+    }
+    
+    // Network or other errors
+    if (error instanceof TypeError && error.message.includes('fetch')) {
+      throw new ApiException('Network error - please check your connection', 0, 'NETWORK_ERROR');
+    }
+    
+    throw new ApiException('An unexpected error occurred', 0, 'UNKNOWN_ERROR', error);
   }
-  
-  const contentType = response.headers.get('content-type');
-  if (contentType && contentType.includes('application/json')) {
-    return response.json();
-  }
-  
-  return response.text() as unknown as T;
 };
 
 // Authentication API
 export const authAPI = {
-  login: async (email: string, password: string) => {
-    const response = await apiRequest<{
-      user: any;
-      accessToken: string;
-    }>('/auth/login', {
+  login: async (email: string, password: string): Promise<AuthResponse> => {
+    const response = await apiRequest<AuthResponse>('/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     });
@@ -69,24 +141,54 @@ export const authAPI = {
     return response;
   },
   
-  register: async (userData: {
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-  }) => {
-    return apiRequest('/auth/register', {
-      method: 'POST',
-      body: JSON.stringify(userData),
-    });
+  register: async (userData: RegisterRequest): Promise<{ message: string; user?: User }> => {
+    try {
+      const response = await apiRequest<{ message: string; user?: User }>('/auth/register', {
+        method: 'POST',
+        body: JSON.stringify(userData),
+      });
+      
+      return response;
+    } catch (error) {
+      if (error instanceof ApiException) {
+        // Handle common registration errors
+        if (error.statusCode === 409) {
+          throw new ApiException('An account with this email already exists', error.statusCode, 'EMAIL_EXISTS');
+        }
+        if (error.statusCode === 400) {
+          throw new ApiException(error.message || 'Invalid registration data provided', error.statusCode, 'VALIDATION_ERROR', error.details);
+        }
+      }
+      throw error;
+    }
   },
   
-  getProfile: async () => {
-    return apiRequest('/auth/profile');
+  getProfile: async (): Promise<User> => {
+    return apiRequest<User>('/auth/profile');
+  },
+
+  refreshToken: async (): Promise<AuthResponse> => {
+    const response = await apiRequest<AuthResponse>('/auth/refresh', {
+      method: 'POST',
+    });
+    
+    setToken(response.accessToken);
+    return response;
+  },
+
+  logout: async (): Promise<void> => {
+    try {
+      await apiRequest('/auth/logout', {
+        method: 'POST',
+      });
+    } finally {
+      // Always remove token, even if the request fails
+      removeToken();
+    }
   },
 };
 
-// Blocks API
+// Blocks API (keeping existing functionality)
 export const blocksAPI = {
   getAll: async (params?: {
     status?: 'ongoing' | 'resolved';

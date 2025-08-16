@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { authAPI } from '../../services/api';
+import { Button } from '../Button';
 
 interface LoginFormProps {
   onSuccess: () => void;
+  onSwitchToRegister?: () => void;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
+export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onSwitchToRegister }) => {
   const [email, setEmail] = useState('test@example.com');
   const [password, setPassword] = useState('testpassword123');
   const [isLoading, setIsLoading] = useState(false);
@@ -19,8 +21,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
     try {
       await authAPI.login(email, password);
       onSuccess();
-    } catch (err) {
-      setError('Login failed. Please check your credentials.');
+    } catch (err: any) {
+      setError(err?.message || 'Login failed. Please check your credentials.');
       console.error('Login error:', err);
     } finally {
       setIsLoading(false);
@@ -69,14 +71,30 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
             />
           </div>
 
-          <button
+          <Button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 text-white font-medium py-2 px-4 rounded-md transition-colors"
+            className="w-full mt-6"
+            variant="primary"
           >
             {isLoading ? 'Logging in...' : 'Login'}
-          </button>
+          </Button>
         </form>
+
+        {onSwitchToRegister && (
+          <div className="mt-6 text-center">
+            <p className="text-slate-400 text-sm">
+              Don't have an account?{' '}
+              <button
+                type="button"
+                onClick={onSwitchToRegister}
+                className="text-blue-400 hover:text-blue-300 underline focus:outline-none"
+              >
+                Create one here
+              </button>
+            </p>
+          </div>
+        )}
 
         <div className="mt-6 p-4 bg-slate-700/50 rounded-lg">
           <p className="text-sm text-slate-400 text-center">
