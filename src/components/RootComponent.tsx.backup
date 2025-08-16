@@ -6,7 +6,6 @@ import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { AppContext, rootRoute, useAppContext } from "@/Routes";
 import useBlocks from "./dashboard/hooks/useBlocks";
 import { AppContextType } from "@/types";
-import { LoginForm } from "./auth/LoginForm";
 
 const RootComponent = () => {
   const {
@@ -25,24 +24,7 @@ const RootComponent = () => {
     handleEditBlock,
     stats,
     allUniqueTags,
-    loading,
-    isAuthenticated,
-    handleLogin,
   } = useBlocks();
-
-  // Show login form if not authenticated
-  if (!isAuthenticated) {
-    return <LoginForm onSuccess={handleLogin} />;
-  }
-
-  // Show loading state
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
-      </div>
-    );
-  }
 
   const appContextValue: AppContextType = {
     blocks,
@@ -61,7 +43,6 @@ const RootComponent = () => {
     handleCloseDetailsModal,
     handleViewBlockDetails,
   };
-  
   return (
     <AppContext.Provider value={appContextValue}>
       <div className="min-h-screen bg-slate-900 font-sans">
