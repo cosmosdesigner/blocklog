@@ -8,7 +8,7 @@ export const loginRoute = createRoute({
   component: function LoginView() {
     const navigate = useNavigate();
 
-    const handleSuccess = () => {
+    const handleSuccess = async () => {
       // After successful login, navigate to dashboard/home
       navigate({ to: "/" });
     };

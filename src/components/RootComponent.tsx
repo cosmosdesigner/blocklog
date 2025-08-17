@@ -37,9 +37,14 @@ const RootComponent = () => {
 
   // Show login form if not authenticated and not on an auth route
   if (!isAuthenticated && !isAuthRoute) {
+    const handleLoginSuccess = async () => {
+      await handleLogin();
+      navigate({ to: "/" });
+    };
+    
     return (
       <LoginForm
-        onSuccess={handleLogin}
+        onSuccess={handleLoginSuccess}
         onSwitchToRegister={() => navigate({ to: "/register" })}
       />
     );

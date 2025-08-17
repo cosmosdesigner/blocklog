@@ -3,7 +3,7 @@ import { authAPI } from "../../services/api";
 import { Button } from "../Button";
 
 interface LoginFormProps {
-  onSuccess: () => void;
+  onSuccess: () => Promise<void> | void;
   onSwitchToRegister?: () => void;
 }
 
@@ -23,7 +23,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
 
     try {
       await authAPI.login(email, password);
-      onSuccess();
+      await onSuccess();
     } catch (err: any) {
       setError(err?.message || "Login failed. Please check your credentials.");
       console.error("Login error:", err);

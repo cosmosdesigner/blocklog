@@ -147,7 +147,13 @@ export default function useBlocks() {
   }, []);
 
   const handleLogin = useCallback(() => {
-    setIsAuthenticated(true);
+    return new Promise<void>((resolve) => {
+      setIsAuthenticated(true);
+      // Use setTimeout to ensure state has been updated
+      setTimeout(() => {
+        resolve();
+      }, 0);
+    });
   }, []);
 
   const stats = useMemo(() => {
