@@ -10,7 +10,7 @@ from dotenv import load_dotenv # Import load_dotenv
 load_dotenv()
 
 # Recommended: set GOOGLE_API_KEY in your .env file in the project root
-GEMINI_API_KEY = 'AIzaSyDpszdoA0ffmrmDyA5pljtUJdkcviPogo4'
+GEMINI_API_KEY = ''
 
 if not GEMINI_API_KEY:
     print("Error: GOOGLE_API_KEY not found.")
